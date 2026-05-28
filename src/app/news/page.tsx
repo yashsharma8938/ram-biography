@@ -7,8 +7,29 @@ import { X, ZoomIn, FileText, Calendar, ExternalLink } from "lucide-react";
 import SectionReveal from "@/components/ui/SectionReveal";
 import GlassCard from "@/components/ui/GlassCard";
 
+export interface NewsItem {
+  _id?: string;
+  id?: number | string;
+  title: string;
+  date?: string;
+  publishedAt?: string;
+  source: string;
+  excerpt: string;
+}
+
+export interface CuttingItem {
+  _id?: string;
+  id?: number | string;
+  title: string;
+  publication: string;
+  date?: string;
+  publishedAt?: string;
+  image: string;
+  desc: string;
+}
+
 // Mock data (will be fetched from Sanity)
-const mockNews = [
+const mockNews: NewsItem[] = [
   {
     id: 1,
     title: "Breakthrough in Novel Target Identification for Multi-Drug Resistant Pathogens",
@@ -25,7 +46,7 @@ const mockNews = [
   }
 ];
 
-const mockCuttings = [
+const mockCuttings: CuttingItem[] = [
   {
     id: 1,
     title: "Pioneering Research from Indian Scientist Gains Global Acclaim",
@@ -45,17 +66,17 @@ const mockCuttings = [
 ];
 
 export default function NewsPage() {
-  const [selectedCutting, setSelectedCutting] = useState<any>(null);
-  const [news, setNews] = useState(mockNews);
-  const [cuttings, setCuttings] = useState(mockCuttings);
+  const [selectedCutting, setSelectedCutting] = useState<CuttingItem | null>(null);
+  const [news, setNews] = useState<NewsItem[]>(mockNews);
+  const [cuttings, setCuttings] = useState<CuttingItem[]>(mockCuttings);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCMSData() {
       try {
         // Attempt to fetch from Sanity
-        const fetchedNews = await client.fetch(`*[_type == "newsType"] | order(publishedAt desc)`);
-        const fetchedCuttings = await client.fetch(`*[_type == "newspaperType"] | order(publishedAt desc)`);
+        const fetchedNews: NewsItem[] = await client.fetch(`*[_type == "newsType"] | order(publishedAt desc)`);
+        const fetchedCuttings: CuttingItem[] = await client.fetch(`*[_type == "newspaperType"] | order(publishedAt desc)`);
         
         if (fetchedNews && fetchedNews.length > 0) setNews(fetchedNews);
         if (fetchedCuttings && fetchedCuttings.length > 0) setCuttings(fetchedCuttings);
@@ -97,12 +118,12 @@ export default function NewsPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {news.map((item, i) => (
-              <SectionReveal key={item._id || item.id} delay={i * 0.1}>
+              <SectionReveal key={item._id ?? item.id ?? i} delay={i * 0.1}>
                 <GlassCard className="p-8 h-full flex flex-col group cursor-pointer hover:border-bronze/40 transition-colors duration-500">
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-label text-bronze">{item.source}</span>
                     <div className="flex items-center gap-2 text-slate text-xs font-manrope uppercase tracking-wider">
-                      <Calendar className="w-3 h-3" /> {new Date(item.date || item.publishedAt).toLocaleDateString()}
+                      <Calendar className="w-3 h-3" /> {new Date(item.date ?? item.publishedAt ?? Date.now()).toLocaleDateString()}
                     </div>
                   </div>
                   <h3 className="heading-editorial text-2xl font-bold text-charcoal mb-4 group-hover:text-walnut transition-colors">{item.title}</h3>
@@ -125,7 +146,7 @@ export default function NewsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {cuttings.map((cutting, i) => (
-              <SectionReveal key={cutting._id || cutting.id} delay={i * 0.1}>
+              <SectionReveal key={cutting._id ?? cutting.id ?? i} delay={i * 0.1}>
                 <div 
                   className="group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-sm shadow-xl"
                   onClick={() => setSelectedCutting(cutting)}
@@ -139,7 +160,7 @@ export default function NewsPage() {
                   <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform">
                     <div className="text-ivory font-manrope text-xs uppercase tracking-widest mb-2 flex justify-between">
                       <span>{cutting.publication}</span>
-                      <span>{new Date(cutting.date).getFullYear()}</span>
+                      <span>{new Date(cutting.date ?? cutting.publishedAt ?? Date.now()).getFullYear()}</span>
                     </div>
                     <h3 className="heading-editorial text-xl text-warm-white">{cutting.title}</h3>
                   </div>
@@ -192,7 +213,7 @@ export default function NewsPage() {
               </div>
 
               <div className="w-full md:w-1/3 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-b from-warm-white to-parchment">
-                <div className="text-label mb-6 text-bronze">{selectedCutting.publication} · {new Date(selectedCutting.date).toLocaleDateString()}</div>
+                <div className="text-label mb-6 text-bronze">{selectedCutting.publication} · {new Date(selectedCutting.date ?? selectedCutting.publishedAt ?? Date.now()).toLocaleDateString()}</div>
                 <h2 className="heading-editorial text-3xl font-bold text-charcoal mb-6">{selectedCutting.title}</h2>
                 <p className="text-body text-slate mb-8">{selectedCutting.desc}</p>
                 <button className="btn-editorial btn-outline-warm w-full flex items-center justify-center gap-2">

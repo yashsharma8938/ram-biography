@@ -5,9 +5,10 @@ import { client } from "@/sanity/client";
 import SectionReveal from "@/components/ui/SectionReveal";
 import GlassCard from "@/components/ui/GlassCard";
 import { Activity, Beaker, Clock, ChevronRight } from "lucide-react";
+import { ProjectItem } from "@/types/projects";
 
 // Mock Data (will be fetched from Sanity)
-const activeProjects = [
+const activeProjects: ProjectItem[] = [
   {
     id: "proj-1",
     title: "Novel MDR Pathogen Inhibitor Synthesis",
@@ -39,13 +40,13 @@ const activeProjects = [
 ];
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState(activeProjects);
+  const [projects, setProjects] = useState<ProjectItem[]>(activeProjects);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const fetchedProjects = await client.fetch(`*[_type == "projectType"] | order(lastUpdated desc)`);
+        const fetchedProjects: ProjectItem[] = await client.fetch(`*[_type == "projectType"] | order(lastUpdated desc)`);
         if (fetchedProjects && fetchedProjects.length > 0) {
           setProjects(fetchedProjects);
         }
