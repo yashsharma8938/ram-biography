@@ -72,7 +72,7 @@ export default function RootLayout({
       lang="en"
       className={`${cinzel.variable} ${playfair.variable} ${inter.variable} ${manrope.variable} ${cormorant.variable}`}
     >
-      <body className="paper-texture">
+      <body>
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>

@@ -5,15 +5,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-border-subtle bg-parchment/50">
-      <div className="container-editorial py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="relative border-t border-border-subtle" style={{ background: "linear-gradient(180deg, var(--color-surface-deep), #e8eff5)" }}>
+      <div className="container-editorial py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="heading-cinematic text-lg tracking-[0.1em] text-charcoal mb-2">
+            <div className="heading-cinematic text-lg tracking-[0.1em] text-text-primary mb-2">
               Dr. Ram Shankar
             </div>
-            <div className="heading-cinematic text-sm tracking-[0.1em] text-bronze mb-6">
+            <div className="heading-cinematic text-sm tracking-[0.1em] text-teal mb-5">
               Upadhayaya
             </div>
             <p className="text-sm text-slate leading-relaxed font-manrope max-w-xs">
@@ -23,10 +23,10 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <div className="text-label mb-6">Explore</div>
-            <div className="space-y-3">
+            <div className="text-label mb-5">Explore</div>
+            <div className="space-y-2.5">
               {navigationLinks.slice(0, 5).map((link) => (
-                <Link key={link.href} href={link.href} className="block text-sm text-slate hover:text-walnut transition-colors font-manrope">
+                <Link key={link.href} href={link.href} className="block text-sm text-slate hover:text-teal transition-colors font-manrope">
                   {link.name}
                 </Link>
               ))}
@@ -35,10 +35,10 @@ export default function Footer() {
 
           {/* More */}
           <div>
-            <div className="text-label mb-6">More</div>
-            <div className="space-y-3">
+            <div className="text-label mb-5">More</div>
+            <div className="space-y-2.5">
               {navigationLinks.slice(5, 10).map((link) => (
-                <Link key={link.href} href={link.href} className="block text-sm text-slate hover:text-walnut transition-colors font-manrope">
+                <Link key={link.href} href={link.href} className="block text-sm text-slate hover:text-teal transition-colors font-manrope">
                   {link.name}
                 </Link>
               ))}
@@ -47,11 +47,11 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <div className="text-label mb-6">Connect</div>
-            <div className="space-y-3 text-sm text-slate font-manrope">
+            <div className="text-label mb-5">Connect</div>
+            <div className="space-y-2.5 text-sm text-slate font-manrope">
               <p>Genome Valley, Hyderabad</p>
               <p>Telangana, India</p>
-              <Link href="/contact" className="block text-walnut hover:text-espresso transition-colors mt-4">
+              <Link href="/contact" className="block text-teal hover:text-teal-light transition-colors mt-4 font-medium">
                 Get in Touch →
               </Link>
             </div>
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-6 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-xs text-ash font-manrope tracking-wide">
             © {currentYear} Dr. Ram Shankar Upadhayaya. All rights reserved.
           </div>

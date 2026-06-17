@@ -29,7 +29,7 @@ export default function AnimatedCounter({ end, suffix = "", duration = 2000, lab
 
   return (
     <div ref={ref} className="text-center">
-      <div className="heading-cormorant text-5xl md:text-6xl font-light text-walnut mb-2">
+      <div className="heading-cormorant text-5xl md:text-6xl font-light text-teal mb-2">
         {count}{suffix}
       </div>
       <div className="text-label">{label}</div>

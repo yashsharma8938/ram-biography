@@ -60,21 +60,21 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen pt-32 pb-24 relative overflow-hidden bg-ivory">
+    <div className="min-h-screen pt-32 pb-20 relative overflow-hidden">
       
       {/* Background styling */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-bronze/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-teal/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container-editorial relative z-10">
         
         {/* HEADER */}
         <SectionReveal>
-          <div className="max-w-4xl mb-24">
-            <div className="flex items-center gap-3 mb-8">
+          <div className="max-w-4xl mb-20">
+            <div className="flex items-center gap-3 mb-6">
               <div className="divider-walnut" style={{ width: 40 }} />
               <span className="text-label">Live Tracker</span>
             </div>
-            <h1 className="heading-editorial text-5xl md:text-7xl font-bold text-charcoal mb-6">
+            <h1 className="heading-editorial text-5xl md:text-7xl font-bold text-text-primary mb-5">
               Current Work & Discoveries
             </h1>
             <p className="text-body text-xl max-w-2xl text-slate">
@@ -84,17 +84,17 @@ export default function ProjectsPage() {
         </SectionReveal>
 
         {/* PROJECTS GRID */}
-        <div className="space-y-16">
+        <div className="space-y-12">
           {projects.map((project, idx) => (
             <SectionReveal key={project._id || project.id} delay={idx * 0.1}>
-              <GlassCard className="p-0 overflow-hidden border-border-strong hover:shadow-cinematic transition-shadow duration-700 bg-warm-white">
+              <GlassCard className="p-0 overflow-hidden border-border-medium hover:shadow-cinematic transition-shadow duration-700 bg-white">
                 <div className="flex flex-col lg:flex-row">
                   
                   {/* Left Column: Info */}
-                  <div className="w-full lg:w-2/3 p-10 md:p-16 flex flex-col justify-between">
+                  <div className="w-full lg:w-2/3 p-8 md:p-12 flex flex-col justify-between">
                     <div>
-                      <div className="flex flex-wrap items-center gap-4 mb-6">
-                        <span className="px-4 py-1.5 rounded-full bg-walnut/5 text-walnut font-manrope text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-4 mb-5">
+                        <span className="px-4 py-1.5 rounded-full bg-teal/5 text-teal font-manrope text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
                           <Activity className="w-3 h-3" /> {project.status}
                         </span>
                         <span className="text-label text-slate flex items-center gap-2">
@@ -102,11 +102,11 @@ export default function ProjectsPage() {
                         </span>
                       </div>
                       
-                      <h2 className="heading-editorial text-3xl md:text-4xl font-bold text-charcoal mb-6">
+                      <h2 className="heading-editorial text-3xl md:text-4xl font-bold text-text-primary mb-5">
                         {project.title}
                       </h2>
                       
-                      <p className="text-body text-lg text-slate mb-12 max-w-2xl">
+                      <p className="text-body text-lg text-slate mb-10 max-w-2xl">
                         {project.description}
                       </p>
                     </div>
@@ -114,12 +114,12 @@ export default function ProjectsPage() {
                     {/* Progress Bar */}
                     <div className="w-full max-w-md">
                       <div className="flex justify-between items-end mb-2">
-                        <span className="font-manrope text-xs font-bold uppercase tracking-widest text-charcoal">Research Progress</span>
-                        <span className="font-playfair text-xl text-walnut italic">{project.progress}%</span>
+                        <span className="font-manrope text-xs font-bold uppercase tracking-widest text-text-primary">Research Progress</span>
+                        <span className="font-playfair text-xl text-teal italic">{project.progress}%</span>
                       </div>
-                      <div className="h-1 w-full bg-charcoal/10 rounded-full overflow-hidden">
+                      <div className="h-1 w-full bg-surface-deep rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-bronze to-walnut transition-all duration-1000 ease-out"
+                          className="h-full bg-gradient-to-r from-teal to-royal-blue transition-all duration-1000 ease-out"
                           style={{ width: `${project.progress}%` }}
                         />
                       </div>
@@ -127,25 +127,24 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Right Column: Timeline */}
-                  <div className="w-full lg:w-1/3 bg-gradient-to-b from-parchment to-cream p-10 md:p-16 border-l border-bronze/10">
-                    <h3 className="heading-cormorant text-2xl font-bold text-charcoal mb-10 flex items-center gap-2">
-                      <Clock className="w-5 h-5 text-bronze" /> Project Timeline
+                  <div className="w-full lg:w-1/3 bg-gradient-to-b from-surface-deep to-surface-primary p-8 md:p-12 border-l border-teal/10">
+                    <h3 className="heading-cormorant text-2xl font-bold text-text-primary mb-8 flex items-center gap-2">
+                      <Clock className="w-5 h-5 text-teal" /> Project Timeline
                     </h3>
                     
-                    <div className="relative border-l border-bronze/30 ml-3 space-y-10">
-                      {project.timeline && project.timeline.map((step: any, stepIdx: number) => (
+                    <div className="relative border-l border-teal/30 ml-3 space-y-8">
+                      {project.timeline && project.timeline.map((step: { date: string; milestone: string }, stepIdx: number) => (
                         <div key={stepIdx} className="relative pl-8 group">
-                          {/* Timeline dot */}
-                          <div className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-ivory border-2 border-bronze group-hover:bg-bronze transition-colors duration-300" />
-                          <div className="text-label text-bronze mb-1">{step.date}</div>
-                          <div className="font-manrope text-sm font-semibold text-charcoal leading-relaxed">{step.milestone}</div>
+                          <div className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-white border-2 border-teal group-hover:bg-teal transition-colors duration-300" />
+                          <div className="text-label text-teal mb-1">{step.date}</div>
+                          <div className="font-manrope text-sm font-semibold text-text-primary leading-relaxed">{step.milestone}</div>
                         </div>
                       ))}
                     </div>
                     
-                    <div className="mt-12 pt-8 border-t border-bronze/20 text-xs font-manrope text-slate flex items-center justify-between">
+                    <div className="mt-10 pt-6 border-t border-teal/20 text-xs font-manrope text-slate flex items-center justify-between">
                       <span>Last Updated: {project.lastUpdated ? new Date(project.lastUpdated).toLocaleDateString() : 'Recently'}</span>
-                      <button className="text-walnut hover:text-bronze flex items-center gap-1 font-semibold uppercase tracking-wider transition-colors">
+                      <button className="text-teal hover:text-teal-light flex items-center gap-1 font-semibold uppercase tracking-wider transition-colors">
                         View Details <ChevronRight className="w-3 h-3" />
                       </button>
                     </div>

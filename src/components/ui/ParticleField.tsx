@@ -5,7 +5,7 @@ interface Particle {
   x: number; y: number; vx: number; vy: number; radius: number; opacity: number;
 }
 
-export default function ParticleField({ color = "160, 132, 92", count = 30 }: { color?: string; count?: number }) {
+export default function ParticleField({ color = "100, 130, 180", count = 30 }: { color?: string; count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: -100, y: -100 });
@@ -15,10 +15,10 @@ export default function ParticleField({ color = "160, 132, 92", count = 30 }: { 
     particlesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
       radius: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.3 + 0.05,
+      opacity: Math.random() * 0.25 + 0.03,
     }));
   }, [count]);
 
@@ -69,7 +69,7 @@ export default function ParticleField({ color = "160, 132, 92", count = 30 }: { 
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${color}, ${0.03 * (1 - dist / 180)})`;
+            ctx.strokeStyle = `rgba(${color}, ${0.025 * (1 - dist / 180)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -87,5 +87,5 @@ export default function ParticleField({ color = "160, 132, 92", count = 30 }: { 
     };
   }, [color, initParticles]);
 
-  return <canvas ref={canvasRef} className="w-full h-full absolute inset-0" style={{ opacity: 0.5 }} />;
+  return <canvas ref={canvasRef} className="w-full h-full absolute inset-0" style={{ opacity: 0.4 }} />;
 }
